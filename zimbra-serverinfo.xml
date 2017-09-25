@@ -3,7 +3,7 @@
 <!DOCTYPE serverinfo SYSTEM "serverinfo.dtd">
 
 <!--
- Copyright (c) 2006-2013 Apple Inc. All rights reserved.
+ Copyright (c) 2006-2016 Apple Inc. All rights reserved.
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -19,110 +19,131 @@
  -->
 
 <serverinfo>
-	<host>localhost</host>
-	<nonsslport>7070</nonsslport>
-	<sslport>7070</sslport>
+	<host>pan.local</host>
+	<nonsslport>80</nonsslport>
+	<sslport>443</sslport>
 	<authtype>basic</authtype>
+	<!-- <unix>/tmp/caldavd_requests/unsecured.sock</unix> -->
 
 	<waitcount>120</waitcount>
 	<waitdelay>0.25</waitdelay>
 	<waitsuccess>30</waitsuccess>
 
 	<features>
+    <!--  Standard CalDAV features that may not be supported -->
+    <!-- ZIMBRA <feature>CalDAV text-match</feature> -->							<!-- Text match in calendar query -->
+    <!-- ZIMBRA <feature>this-and-future</feature> -->                <!-- is supported  -->
+    <!-- ZIMBRA <feature>shared-properties-mod</feature> -->          <!-- Modification of shared properties on collection  -->
+
 		<!--  Generic WebDAV extensions -->
-        <!-- GREN <feature>COPY Method</feature>    GREN -->							<!-- COPY method -->
-        <!-- GREN <feature>MOVE Method</feature>    GREN -->							<!-- MOVE method -->
+		<!-- ZIMBRA <feature>COPY Method</feature> -->							<!-- COPY method -->
+		<!-- ZIMBRA <feature>MOVE Method</feature> -->							<!-- MOVE method -->
 		<feature>Extended MKCOL</feature>						<!-- Extended MKCOL -->
-		
+    <!-- ZIMBRA <feature>Sync invalid token</feature> -->				<!-- Sync report can recognize invalid tokens -->
+
 		<!-- ACL related -->
-        <!-- GREN <feature>ACL Method</feature>    GREN -->							<!-- ACL method -->
+		<!-- ZIMBRA <feature>ACL Method</feature> -->							<!-- ACL method -->
 		<feature>acl-principal-prop-set REPORT</feature>		<!-- ACL acl-principal-prop-set REPORT -->
 		<feature>principal-match REPORT</feature>				<!-- ACL principal-match REPORT -->
 		<feature>principal-property-search REPORT</feature>		<!-- ACL principal-property-search REPORT -->
 		<feature>principal-search-property-set REPORT</feature>	<!-- ACL principal-search-property-set REPORT -->
+		<!-- ZIMBRA <feature>calendarserver-principal-search REPORT</feature> -->	<!-- ACL calendarserver-principal-search REPORT -->
 
-        <!-- GREN <feature>calendarserver-principal-search REPORT</feature>  GREN -->	<!-- ACL calendarserver-principal-search REPORT -->
-        <!-- GREN <feature>add-member</feature>    GREN -->					<!-- Add-member used to create resources -->
-
+		<!-- ZIMBRA <feature>add-member</feature> -->					<!-- Add-member used to create resources -->
+    <feature>disallow-propfind-depth-infinite</feature>		<!-- Depth infinity disallowed on PROPFIND -->
 		<!-- <feature>auth-on-root</feature> -->		<!-- Whether the server requires authentication on the root URI -->
-        <!-- GREN <feature>brief</feature>    GREN -->					    <!-- Brief header for PROPFIND, REPORT -->
-        <!-- GREN <feature>bulk-post</feature>    GREN -->					<!-- Bulk POST requests -->
-        <!-- GREN <feature>ctag</feature>    GREN -->							<!-- ctag extension -->
-        <!-- GREN <feature>current-user-principal</feature>    GREN -->		<!-- current-user-principal extension -->
+		<!-- ZIMBRA <feature>brief</feature> -->					    <!-- Brief header for PROPFIND, REPORT -->
+		<!-- ZIMBRA <feature>bulk-post</feature> -->					<!-- Bulk POST requests -->
+		<!-- ZIMBRA <feature>ctag</feature> -->							<!-- ctag extension -->
+		<!-- ZIMBRA <feature>current-user-principal</feature> -->		<!-- current-user-principal extension -->
 		<feature>directory listing</feature> 			<!-- GET on collection -->
-        <!-- GREN <feature>extended-principal-search</feature>    GREN -->	<!-- Extended principal-property-search REPORT extension -->
-        <!-- GREN <feature>expand-property</feature>    GREN -->				<!-- Expand property REPORT -->
-        <!-- GREN <feature>only-proxy-groups</feature>    GREN -->			<!-- Group-membership only includes delegated-to groups -->
-        <!-- GREN <feature>limits</feature>    GREN -->						<!-- max-collections and max-resources limits -->
+    <!-- ZIMBRA <feature>conditional-directory listing</feature> --> 			Conditional GET on collection
+		<!-- ZIMBRA <feature>extended-principal-search</feature> -->	<!-- Extended principal-property-search REPORT extension -->
+		<!-- ZIMBRA <feature>expand-property</feature> -->				<!-- Expand property REPORT -->
+		<!-- ZIMBRA <feature>only-proxy-groups</feature> -->			<!-- Group-membership only includes delegated-to groups -->
+		<!-- ZIMBRA <feature>limits</feature> -->						<!-- max-collections and max-resources limits -->
+		<!-- ZIMBRA <feature>own-root</feature> -->						<!-- / is owned by this service -->
 		<feature>prefer</feature>						<!-- Prefer header overall support -->
 		<feature>prefer-minimal</feature>				<!-- Prefer header return=minimal -->
-        <!-- GREN <feature>prefer-representation</feature>    GREN -->		<!-- Prefer header return=representation -->
-        <!-- GREN <feature>prefer-noroot</feature>    GREN -->				<!-- Prefer header depth-noroot -->
-        <!-- GREN <feature>quota</feature>    GREN -->						<!-- WebDAV QUOTA -->
+		<!-- ZIMBRA <feature>prefer-representation</feature> -->		<!-- Prefer header return=representation -->
+		<!-- ZIMBRA <feature>prefer-noroot</feature> -->				<!-- Prefer header depth-noroot -->
+		<!-- ZIMBRA <feature>quota</feature> -->						<!-- WebDAV QUOTA -->
 		<!-- <feature>quota-on-resources</feature> -->	<!-- WebDAV QUOTA on calendar and address book object resources -->
-        <!-- GREN <feature>resource-id</feature>    GREN -->					<!-- WebDAV BIND DAV:resource-id property -->
-        <!-- GREN <feature>sync-report</feature>    GREN -->					<!-- WebDAV collection sync REPORT -->
-	<!-- <feature>sync-report-limit</feature> -->	<!-- WebDAV collection sync REPORT DAV:limit support -->
-        <!-- GREN <feature>sync-report-home</feature>    GREN -->				<!-- WebDAV collection sync REPORT on Homes -->
+		<!-- ZIMBRA <feature>resource-id</feature> -->					<!-- WebDAV BIND DAV:resource-id property -->
+		<!-- <feature>server-info</feature> -->			<!-- WebDAV server-info document -->
+		<!-- ZIMBRA <feature>sync-report</feature> -->					<!-- WebDAV collection sync REPORT -->
+		<!-- <feature>sync-report-limit</feature> -->	<!-- WebDAV collection sync REPORT DAV:limit support -->
+		<!-- ZIMBRA <feature>sync-report-home</feature> -->				<!-- WebDAV collection sync REPORT on Homes -->
+		<!-- ZIMBRA <feature>sync-report-config-token</feature> -->		<!-- Sync REPORT token includes configuration component -->
 		<feature>well-known</feature>					<!-- well-known feature -->
 
 		<!-- <feature>per-object-ACLs</feature> -->		<!-- ACL for objects in calendar/address books -->
 		<!-- <feature>regular-collection</feature> -->  <!-- Regular collections allowed in calendar/address book homes -->
 
-		<!-- <feature>json-data</feature> -->			<!-- jCal and jCard support -->
+		<!-- ZIMBRA <feature>json-data</feature> -->					<!-- jCal and jCard support -->
+
+		<!--  CalendarServer specific extensions -->
+		<feature>control-api</feature>					<!-- Control API support -->
 
 		<!-- CalDAV specific extension -->
 		<feature>caldav</feature>					    <!-- Basic CalDAV feature enabler -->
-
-	<!-- GREN <feature>attachments-collection</feature>   GREN -->		<!-- Server uses a collection in same WebDAV tree to store attachments -->
-        <!-- GREN <feature>auto-accept</feature>    GREN -->					<!-- Auto-accept for rooms & locations -->
-        <!-- GREN <feature>auto-accept-modes</feature>    GREN -->			<!-- Auto-accept modes -->
-        <!-- GREN <feature>client-fix-TRANSP</feature>  GREN -->		<!-- fix client TRANSP -->
-		<!--<feature> dropbox</feature> -->				<!-- dropbox extension -->
-        <!-- GREN <feature>default-alarms</feature>    GREN -->				<!-- default alarms extension -->
-        <!-- GREN <feature>EMAIL parameter</feature>    GREN -->				<!-- Server normalizes cuaddress and adds EMAIL parameter -->
-        <!-- GREN <feature>extended-freebusy</feature>    GREN -->	      	<!-- Extended freebusy response -->
-        <!---Gren <feature>freebusy-url</feature>   GREN -->    <!-- Freebusy URL -->
-        <feature>implicit-scheduling</feature>    			<!-- CalDAV scheduling - implicit -->
-        <!-- GREN <feature>location-resource-tracking</feature>    GREN -->   <!-- Server tracks who makes unscheduled changes to locations and resources -->
-        <!-- GREN <feature>managed-attachments</feature>    GREN -->			<!-- CalDAV Managed Attachments -->
-        <!-- GREN <feature>maskuid</feature>    GREN -->						<!-- maskuid extension -->
+		<!-- ZIMBRA <feature>attachments-collection</feature> -->		<!-- Server uses a collection in same WebDAV tree to store attachments -->
+		<!-- ZIMBRA <feature>auto-accept</feature> -->					<!-- Auto-accept for rooms & locations -->
+		<!-- ZIMBRA <feature>auto-accept-modes</feature> -->			<!-- Auto-accept modes -->
+		<!-- ZIMBRA <feature>client-fix-TRANSP</feature> -->			<!-- fix client TRANSP -->
+		<!-- <feature>dropbox</feature> -->				<!-- dropbox extension -->
+		<!-- ZIMBRA <feature>default-alarms</feature> -->				<!-- default alarms extension -->
+		<!-- ZIMBRA <feature>EMAIL parameter</feature> -->				<!-- Server normalizes cuaddress and adds EMAIL parameter -->
+		<!-- ZIMBRA <feature>extended-freebusy</feature> -->	      	<!-- Extended freebusy response -->
+		<!-- ZIMBRA <feature>freebusy-url</feature> -->	      			<!-- Freebusy URL -->
+		<!-- ZIMBRA <feature>group-attendee-expansion</feature> -->	    <!-- Auto-expansion of group attendees -->
+		<feature>implicit-scheduling</feature>			<!-- CalDAV scheduling - implicit -->
+		<!-- ZIMBRA <feature>location-resource-tracking</feature> -->   <!-- Server tracks who makes unscheduled changes to locations and resources -->
+		<!-- ZIMBRA <feature>managed-attachments</feature> -->			<!-- CalDAV Managed Attachments -->
+		<!-- ZIMBRA <feature>maskuid</feature> -->						<!-- maskuid extension -->
 		<feature>no-duplicate-uids</feature>			<!-- duplicate UIDs in same home not supported -->
-        <!-- GREN <feature>partstat-timestamp</feature>    GREN -->			<!-- Time stamps when PARTSTAT changes extension -->
+		<!-- ZIMBRA <feature>partstat-timestamp</feature> -->			<!-- Time stamps when PARTSTAT changes extension -->
 		<!-- <feature>podding</feature> -->  			<!-- Podded server -->
-        <!-- GREN <feature>private-comments</feature>    GREN -->				<!-- private-comments extension -->
-        <!-- GREN <feature>private-events</feature>    GREN -->				<!-- private-events extension -->
-        <!-- GREN <feature>proxy</feature>    GREN -->						<!-- calendar-user-proxy extension -->
+		<!-- ZIMBRA <feature>private-comments</feature> -->				<!-- private-comments extension -->
+		<!-- ZIMBRA <feature>private-events</feature> -->				<!-- private-events extension -->
+		<!-- ZIMBRA <feature>proxy</feature> -->						<!-- calendar-user-proxy extension -->
 		<!-- <feature>proxy-authz</feature> -->			<!-- sudo user extension -->
-	<!-- GREN	<feature>recurrence-splitting</feature>	GREN -->			<!-- Recurring components can be split -->
-        <!-- GREN <feature>remove-duplicate-alarms</feature>    GREN -->   	<!-- Server removes any duplicate alarms on PUT -->
-        <!-- GREN <feature>query-extended</feature>    GREN -->				<!-- calendar-query-extended extension -->
-        <!-- GREN <feature>shared-calendars</feature>    GREN -->				<!-- Shared calendars extension -->
-        <!-- GREN <feature>share-calendars-to-groups</feature> GREN --> 	<!-- Share calendars to groups extension -->
-        <!-- GREN <feature>schedule-changes</feature>    GREN -->				<!-- schedule-changes property extension -->
+		<!-- ZIMBRA <feature>recurrence-splitting</feature> -->			<!-- Recurring components can be split -->
+		<!-- ZIMBRA <feature>remove-duplicate-alarms</feature> -->   	<!-- Server removes any duplicate alarms on PUT -->
+		<!-- ZIMBRA <feature>query-extended</feature> -->				<!-- calendar-query-extended extension -->
+		<!-- ZIMBRA <feature>shared-calendars</feature> -->				<!-- Shared calendars extension -->
+		<!-- ZIMBRA <feature>share-calendars-to-groups</feature> -->	<!-- Share calendars to groups extension -->
+    <!-- ZIMBRA <feature>external-sharees-disallowed</feature> -->  <!-- Don't allow sharees that are not in system -->
+		<!-- ZIMBRA <feature>schedule-changes</feature> -->				<!-- schedule-changes property extension -->
 		<feature>split-calendars</feature>				<!-- Calendars are split by component type -->
-        <!-- GREN <feature>supported-component-sets</feature>    GREN -->		<!-- CALDAV:supported-calendar-component-sets on calendar homes -->
-        <!-- GREN <feature>supported-component-sets-one</feature>    GREN -->	<!-- Only single component calendars allowed to be created -->
-        <!-- GREN <feature>timerange-low-limit</feature>    GREN -->			<!-- Time-range only valid one year back -->
-        <!-- GREN <feature>timerange-high-limit</feature>    GREN -->			<!-- Time-range only valid 5 years ahead -->
-	<!-- GREN <feature>timezones-by-reference</feature>	GREN -->	<!-- Timezones by reference enabled -->
-        <!-- GREN <feature>timezone-service</feature>    GREN -->				<!-- Timezone service extension for Wiki-->
-        <!-- GREN <feature>timezone-std-service</feature>    GREN -->			<!-- Timezone standard service extension -->
-	<!-- GREN 	<feature>travel-time-busy</feature> GREN -->			<!-- Travel time appears as busy -->
-        <!-- GREN <feature>vavailability</feature>    GREN -->				<!-- VAVAILABILITY on inbox -->
-	<!-- <feature>vpoll</feature> -->				<!-- VPOLL support for store and scheduling -->
-        <!-- GREN <feature>webcal</feature>    GREN -->						<!-- Internet calendar subscription via GET on calendar collection -->
+		<feature>supported-component-sets</feature>		<!-- CALDAV:supported-calendar-component-sets on calendar homes -->
+		<feature>supported-component-sets-one</feature>	<!-- Only single component calendars allowed to be created -->
+		<feature>timerange-low-limit</feature>			<!-- Time-range only valid one year back -->
+		<feature>timerange-high-limit</feature>			<!-- Time-range only valid 5 years ahead -->
+		<!-- ZIMBRA <feature>timezones-by-reference</feature> -->		<!-- Timezones by reference enabled -->
+		<!-- ZIMBRA <feature>timezone-service</feature> -->				<!-- Timezone service extension for Wiki -->
+		<!-- ZIMBRA <feature>timezone-std-service</feature> -->			<!-- Timezone standard service extension -->
+		<!-- ZIMBRA <feature>trash-collection</feature> -->  			<!-- Trash collection enabled -->
+		<!-- ZIMBRA <feature>travel-time-busy</feature> --> 			<!-- Travel time appears as busy -->
+		<!-- ZIMBRA <feature>vavailability</feature> -->				<!-- VAVAILABILITY on inbox -->
+		<!-- <feature>vpoll</feature> -->				<!-- VPOLL support for store and scheduling -->
+		<!-- ZIMBRA <feature>webcal</feature> -->						<!-- Internet calendar subscription via GET on calendar collection -->
 
 		<!-- CardDAV specific extension -->
 		<feature>carddav</feature> 						<!-- Basic CardDAV feature enabler -->
-        <!-- GREN <feature>default-addressbook</feature>    GREN --> 			<!-- Default address book behavior -->
-        <!-- GREN <feature>shared-addressbooks</feature>    GREN -->			<!-- Shared address books extension -->
-        <!-- GREN <feature>shared-addressbook-groups</feature> GREN --> 	<!-- Shared address book groups extension -->
-		<!-- <feature>directory-gateway</feature> -->	<!-- Directory gateway extension -->
+		<!-- ZIMBRA <feature>default-addressbook</feature> --> 			<!-- Default address book behavior -->
+		<!-- ZIMBRA <feature>shared-addressbooks</feature> -->			<!-- Shared address books extension -->
+		<!-- ZIMBRA <feature>shared-addressbook-groups</feature> -->	<!-- Shared address book groups extension -->
+		<!-- ZIMBRA <feature>directory-gateway</feature> -->			<!-- Directory gateway extension -->
 
 	</features>
 
 	<substitutions>
+    <!-- Some old clients used infinite instead of infinity -->
+    <substitution>
+      <key>$infinite-depth-value:</key>
+      <value>infinite</value>
+    </substitution>
 		<!-- Useful xpath shortcuts for verifiers -->
 		<substitution>
 			<key>$multistatus-response-prefix:</key>
@@ -278,7 +299,7 @@
 		<!-- outbox name-->
 		<substitution>
 			<key>$outbox:</key>
-            <value>Sent</value> <!-- Gren was Outbox in my old testing -->
+			<value>Sent</value>
 		</substitution>
 
 		<!-- dropbox name-->
@@ -303,6 +324,24 @@
 		<substitution>
 			<key>$freebusy:</key>
 			<value>freebusy</value>
+		</substitution>
+
+		<!-- Sync home collection items - use "-" to include the home resource-->
+		<substitution>
+			<key>$calendar_home_items_initial_sync:</key>
+			<value>[-,$calendar:/,$tasks:/,$inbox:/,$outbox:/,$freebusy:,$notification:/]</value>
+		</substitution>
+
+		<!-- Sync collection extra items - use "-" to include the collection-->
+		<substitution>
+			<key>$calendar_sync_extra_items:</key>
+			<value>[-]</value>
+		</substitution>
+
+		<!-- Sync collection extra count - gets added to the totalcount value-->
+		<substitution>
+			<key>$calendar_sync_extra_count:</key>
+			<value>1</value> <!-- the request-uri resource is returned when no token passed-->
 		</substitution>
 
 		<!-- server-to-server inbox-->
@@ -466,6 +505,10 @@
 				<key>$principaluri%d:</key>
 				<value>$principals_uids:$userguid%d:/</value>
 			</substitution>
+      <substitution>
+        <key>$sharingorganizeruri%d:</key>
+        <value>$principals_uids:$userguid%d:/</value>
+      </substitution>
 			<substitution>
 				<key>$principal%dnoslash:</key>
 				<value>$principals_users:$userid%d:</value>
@@ -833,4 +876,21 @@
 		</substitution>
 
 	</substitutions>
+	
+    <calendardatafilter>ATTENDEE:X-CALENDARSERVER-DTSTAMP</calendardatafilter>
+    <calendardatafilter>ATTENDEE:X-CALENDARSERVER-AUTO</calendardatafilter>
+    <calendardatafilter>ATTENDEE:X-CALENDARSERVER-RESET-PARTSTAT</calendardatafilter>
+    <calendardatafilter>CALSCALE</calendardatafilter>
+    <calendardatafilter>PRODID</calendardatafilter>
+    <calendardatafilter>DTSTAMP</calendardatafilter>
+    <calendardatafilter>CREATED</calendardatafilter>
+    <calendardatafilter>LAST-MODIFIED</calendardatafilter>
+    <calendardatafilter>X-WR-CALNAME</calendardatafilter>
+    <calendardatafilter>CLASS=PUBLIC</calendardatafilter>
+    <calendardatafilter>PRIORITY=0</calendardatafilter>
+    <calendardatafilter>TRANSP=OPAQUE</calendardatafilter>
+    <calendardatafilter>SEQUENCE=0</calendardatafilter>
+
+    <addressdatafilter>PRODID</addressdatafilter>
+    <addressdatafilter>REV</addressdatafilter>
 </serverinfo>
