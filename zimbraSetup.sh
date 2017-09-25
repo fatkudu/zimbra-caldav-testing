@@ -5,13 +5,13 @@ domain=example.test
 
 value=true
 [ $# -ge 1 ] && value="$1"
-user=user1@`zmhostname`
+
 # VAL=`echo $value | tr '[:lower:]' '[:upper:]'`
 (set -x;zmlocalconfig -e debug_caldav_enable_dav_client_can_choose_resource_basename="${value}")
 (set -x;zmlocalconfig -e debug_caldav_allow_attendee_for_organizer="${value}")
 
 (set -x;sleep 3)
-bounceZimbra.sh
+zmcontrol restart
 echo createDomain $domain>/tmp/zimbraSetup.prov
 for acct in 01 02 03 04 05 06 07 08 09 10 \
     11 12 13 14 15 16 17 18 19 20 \
