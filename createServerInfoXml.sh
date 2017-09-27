@@ -10,7 +10,7 @@ usage_error ()
     exit 1
 }
 
-caldavtesterRepo=../caldavtester
+caldavtesterRepo=caldavtester
 
 now=`date '+%b%d-%H.%M'`
 while getopts r: CurrOpt
@@ -66,9 +66,10 @@ function doSubstitution {
 }
 
 cp ${REPO_SERVERINFO_XML} ${SERVERINFO_XML}
-editXmlElement host `hostname`
+# editXmlElement host `hostname`
 editXmlElement nonsslport 80
 editXmlElement sslport 443
+editXmlElement waitdelay 0.5
 disableFeature 'CalDAV text-match'
 disableFeature 'this-and-future'
 disableFeature 'shared-properties-mod'
