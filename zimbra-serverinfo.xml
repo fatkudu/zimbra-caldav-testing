@@ -19,17 +19,19 @@
  -->
 
 <serverinfo>
-	<host>pan.local</host>
+	<host>localhost</host>
 	<nonsslport>80</nonsslport>
 	<sslport>443</sslport>
 	<authtype>basic</authtype>
 	<!-- <unix>/tmp/caldavd_requests/unsecured.sock</unix> -->
 
 	<waitcount>120</waitcount>
-	<waitdelay>0.25</waitdelay>
+	<waitdelay>0.5</waitdelay>
 	<waitsuccess>30</waitsuccess>
 
 	<features>
+		<!-- <feature>apple-server</server> -->       <!-- feature used to disable diverse Apple specific tests -->
+
     <!--  Standard CalDAV features that may not be supported -->
     <!-- ZIMBRA <feature>CalDAV text-match</feature> -->							<!-- Text match in calendar query -->
     <!-- ZIMBRA <feature>this-and-future</feature> -->                <!-- is supported  -->
@@ -40,6 +42,9 @@
 		<!-- ZIMBRA <feature>MOVE Method</feature> -->							<!-- MOVE method -->
 		<feature>Extended MKCOL</feature>						<!-- Extended MKCOL -->
     <!-- ZIMBRA <feature>Sync invalid token</feature> -->				<!-- Sync report can recognize invalid tokens -->
+
+    <!-- VTODO related -->
+    <feature>vtodo-supported</feature>          <!-- Big switch to turn off VTODO tests -->
 
 		<!-- ACL related -->
 		<!-- ZIMBRA <feature>ACL Method</feature> -->							<!-- ACL method -->
