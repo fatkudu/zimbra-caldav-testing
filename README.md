@@ -17,9 +17,9 @@ Bootstrapping for Zimbra runs of https://github.com/CalConnect/caldavtester
 
 ## Run tests
 
-    php caldavtester-tools/caldavtests.php --serverinfo=zimbra-serverinfo.xml --testeroptions='--ssl --debug' --revision=1 --run=CalDAV/caldavIOP.xml
+    php caldavtester-tools/caldavtests.php --serverinfo=`pwd`/serverinfo.xml --testeroptions='--ssl --debug' --revision=1 --run=CalDAV/caldavIOP.xml
 
 ## Look at results
 
     # launch WebGUI - tells you the URL to goto
-    php caldavtester-tools/caldavtests.php --gui=`hostname`:8888
+    php caldavtester-tools/caldavtests.php --serverinfo=`pwd`/serverinfo.xml --gui=`hostname`:8888
